@@ -43,7 +43,7 @@ namespace Northwind.Entity.Mapper
             CreateMap<ProductSalesFor1997, DtoProductSalesFor1997>().ReverseMap();
             CreateMap<ProductsByCategory, DtoProductsByCategory>().ReverseMap();
             CreateMap<ProductsAboveAveragePrice, DtoProductsAboveAveragePrice>().ReverseMap();
-
+            
             CreateMap<QuarterlyOrder, DtoQuarterlyOrder>().ReverseMap();
             CreateMap<SummaryOfSalesByQuarter, DtoSummaryOfSalesByQuarter>().ReverseMap();
             CreateMap<SummaryOfSalesByYear, DtoSummaryOfSalesByYear>().ReverseMap();
@@ -51,6 +51,9 @@ namespace Northwind.Entity.Mapper
             CreateMap<SalesTotalsByAmount, DtoSalesTotalsByAmount>().ReverseMap();
             CreateMap<SalesByCategory, DtoSalesByCategory>().ReverseMap();
 
+            CreateMap<User, DtoUser>().ReverseMap();
+            CreateMap<User, DtoLoginUser>().ReverseMap();
+            CreateMap<User, DtoLogin>().ReverseMap();
         }
     }
 }

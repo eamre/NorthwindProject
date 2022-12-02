@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 using Northwind.Entity.Models;
 
 #nullable disable
@@ -9,9 +10,12 @@ namespace Northwind.Dal.Concrete.EntityFramework.Context
 {
     public partial class NorthwindContext : DbContext
     {
-        public NorthwindContext()
-        {
-        }
+        //Bağlantı için yöntem 1
+        //IConfiguration configuration;
+        //public NorthwindContext(IConfiguration configuration)
+        //{
+        //    this.configuration = configuration;
+        //}
 
         public NorthwindContext(DbContextOptions<NorthwindContext> options)
             : base(options)
@@ -47,14 +51,21 @@ namespace Northwind.Dal.Concrete.EntityFramework.Context
         public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYears { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Northwind;Trusted_Connection=True;");
-            }
+        {   
+            optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies:true);
+
+            //if (!optionsBuilder.IsConfigured)
+            //{
+                //lazy loading
+               
+
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Northwind;Trusted_Connection=True;");
+                //1. yöntem //optionsBuilder.UseSqlServer(configuration.GetConnectionString("SqlServer"));
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -84,6 +95,11 @@ namespace Northwind.Dal.Concrete.EntityFramework.Context
                 entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<User>(entity => 
+            {
+                entity.Property(e => e.UserID).HasColumnName("UserID");
             });
 
             modelBuilder.Entity<Category>(entity =>

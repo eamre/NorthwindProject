@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Northwind.Dal.Concrete.EntityFramework.UnitOfWork
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         #region
         DbContext context;

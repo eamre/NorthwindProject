@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Northwind.Entity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Northwind.Dal.Abstract
     public interface ICustomerRepository
     {
         IQueryable CustomerReport();
+        Customer FindCustomer(string id);
 
     }
 }

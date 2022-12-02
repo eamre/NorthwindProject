@@ -22,7 +22,7 @@ namespace Northwind.Dal.Concrete.EntityFramework.Repository
         {
             this.context = context;
             this.dbset = this.context.Set<T>();
-            this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+           // this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
 
         }

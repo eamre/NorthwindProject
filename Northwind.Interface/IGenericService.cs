@@ -18,7 +18,7 @@ namespace Northwind.Interface
         Task<TDto> AddAsync(TDto item);
         TDto Update(TDto item);
         Task<TDto> UpdateAsync(TDto item);
-        bool DeleteById(int id);
+        IResponse <bool> DeleteById(int id, bool saveChanges = true);
         Task<bool> DeleteByIdAsync(int id);
         bool Delete(TDto item);
         Task<bool> DeleteAsync(TDto item);
